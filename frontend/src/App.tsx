@@ -3,9 +3,11 @@
 import React, {useState, useEffect} from "react"
 import Card from "./components/Card"
 import {User} from "./interfaces"
+import Notification from "./Notification" 
 import "./App.css" // Import CSS file for styling
 
 const App: React.FC = () => {
+  const [showNotification, setShowNotification] = useState(false)
   const [users, setUsers] = useState<User[]>([])
   const [searchTerm, setSearchTerm] = useState<string>("")
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
@@ -47,6 +49,13 @@ const App: React.FC = () => {
         })
         const data = await response.json()
         console.log(data.message)
+        setShowNotification(true)
+        console.log("File uploaded")
+
+        // After 3 seconds, close the notification
+        setTimeout(() => {
+          setShowNotification(false)
+        }, 5000)
         // Fetch data again after upload
       }
     } catch (error) {
@@ -57,12 +66,18 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <h1>CSV Data Viewer</h1>
+      {showNotification && (
+        <Notification
+          message="File uploaded successfully!"
+          onClose={() => setShowNotification(false)}
+        />
+      )}
       <div className="input-container">
         <input type="file" accept=".csv" onChange={handleFileChange} />
         <button onClick={handleFileUpload}>Upload</button>
       </div>
       <input
-        className='searchbar'
+        className="searchbar"
         type="text"
         placeholder="Search..."
         value={searchTerm}
@@ -76,6 +91,7 @@ const App: React.FC = () => {
     </div>
   )
 }
+
 
 export default App
 

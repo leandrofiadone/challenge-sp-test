@@ -86,3 +86,5 @@ app.get("/api/users", searchUsers)
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`)
 })
+
+export default app
