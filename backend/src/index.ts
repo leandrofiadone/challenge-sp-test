@@ -2,6 +2,7 @@ import express from "express"
 import multer from "multer"
 import csvtojson from "csvtojson"
 import mongoose from "mongoose"
+import cors from 'cors'
 
 // Interface and Schema for User model
 interface User {
@@ -22,6 +23,7 @@ const User = mongoose.model<User>("User", userSchema)
 
 // Configure Express app and Multer for file upload
 const app = express()
+app.use(cors())
 const port = process.env.PORT || 3000
 const upload = multer({dest: "uploads/"})
 
