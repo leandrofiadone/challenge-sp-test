@@ -20,7 +20,7 @@ app.post("/api/files", upload.single("file"), (req, res) => {
   try {
     // Procesamiento del archivo CSV y almacenamiento de datos...
 
-    res.status(200).json({message: "El archivo se cargó correctamente"})
+    res.status(200).json({message: "The file was uploaded successfully."})
   } catch (error) {
     if (error instanceof Error) {
       // Ahora TypeScript sabe que 'error' es un Error y tiene una propiedad 'message'
