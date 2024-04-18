@@ -5,6 +5,7 @@
   text-align: center;
 }
 
+
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -39,4 +40,38 @@
 
 .read-the-docs {
   color: #888;
+}
+
+/* App.css */
+.App {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+
+
+.input-container {
+  
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 20px;
+  margin-top: 50px;
+  border: 1px solid rgb(236, 236, 236);
+  
+}
+
+.searchbar{
+  margin-bottom: 20px;
+  width: fit-content;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
 }

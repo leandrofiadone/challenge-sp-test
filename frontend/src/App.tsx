@@ -1,10 +1,14 @@
+// App.jsx
+
 import React, {useState, useEffect} from "react"
 import Card from "./components/Card"
 import {User} from "./interfaces"
+import "./App.css" // Import CSS file for styling
 
 const App: React.FC = () => {
   const [users, setUsers] = useState<User[]>([])
   const [searchTerm, setSearchTerm] = useState<string>("")
+  const [selectedFile, setSelectedFile] = useState<File | null>(null)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,25 +24,55 @@ const App: React.FC = () => {
     }
 
     fetchData()
-  }, [searchTerm]) // Fetch data when searchTerm changes
+  }, [searchTerm])
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value)
   }
 
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files.length > 0) {
+      setSelectedFile(event.target.files[0])
+    }
+  }
+
+  const handleFileUpload = async () => {
+    try {
+      const formData = new FormData()
+      if (selectedFile) {
+        formData.append("file", selectedFile)
+        const response = await fetch("http://localhost:3000/api/files", {
+          method: "POST",
+          body: formData
+        })
+        const data = await response.json()
+        console.log(data.message)
+        // Fetch data again after upload
+      }
+    } catch (error) {
+      console.error("Error uploading file:", error)
+    }
+  }
+
   return (
     <div className="App">
       <h1>CSV Data Viewer</h1>
-      {/* Map through the fetched data and render Card component for each user */}
+      <div className="input-container">
+        <input type="file" accept=".csv" onChange={handleFileChange} />
+        <button onClick={handleFileUpload}>Upload</button>
+      </div>
       <input
+        className='searchbar'
         type="text"
         placeholder="Search..."
         value={searchTerm}
         onChange={handleSearchChange}
       />
-      {users.map((user, index) => (
-        <Card key={index} user={user} />
-      ))}
+      <div className="cards-container">
+        {users.map((user, index) => (
+          <Card key={index} user={user} />
+        ))}
+      </div>
     </div>
   )
 }

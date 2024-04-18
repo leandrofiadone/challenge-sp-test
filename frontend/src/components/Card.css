@@ -1,0 +1,14 @@
+.card {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.card h2 {
+  margin-top: 0;
+}
+
+.card p {
+  margin: 5px 0;
+}

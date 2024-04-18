@@ -1,6 +1,6 @@
 import React from "react"
-
 import {User} from "../interfaces"
+import "./Card.css" // Import CSS file for styling
 
 interface Props {
   user: User
@@ -8,7 +8,7 @@ interface Props {
 
 const Card: React.FC<Props> = ({user}) => {
   return (
-    <div >
+    <div className="card">
       <h2>{user.name}</h2>
       <p>City: {user.city}</p>
       <p>Country: {user.country}</p>
