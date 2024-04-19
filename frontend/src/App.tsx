@@ -5,6 +5,11 @@ import Card from "./components/Card"
 import {User} from "./interfaces"
 import Notification from "./Notification" 
 import "./App.css" // Import CSS file for styling
+import dotenv from "dotenv"
+dotenv.config()
+
+// Asigna las variables de entorno a variables locales
+const apiUrl = process.env.REACT_APP_API_URL
 
 const App: React.FC = () => {
   const [showNotification, setShowNotification] = useState(false)
@@ -15,9 +20,7 @@ const App: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(
-          `http://localhost:3000/api/users?q=${searchTerm}`
-        )
+        const response = await fetch(`${apiUrl}/users?q=${searchTerm}`)
         const data = await response.json()
         setUsers(data.data)
       } catch (error) {
@@ -43,7 +46,7 @@ const App: React.FC = () => {
       const formData = new FormData()
       if (selectedFile) {
         formData.append("file", selectedFile)
-        const response = await fetch("http://localhost:3000/api/files", {
+        const response = await fetch(`${apiUrl}/files`, {
           method: "POST",
           body: formData
         })
