@@ -46,7 +46,7 @@ const App: React.FC = () => {
       const formData = new FormData()
       if (selectedFile) {
         formData.append("file", selectedFile)
-        const response = await fetch(`${baseUrl}`, {
+        const response = await fetch(`${baseUrl}/api/files`, {
           method: "POST",
           body: formData
         })
