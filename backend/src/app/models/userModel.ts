@@ -15,6 +15,6 @@ const userSchema = new mongoose.Schema<User>({
   favorite_sport: String
 })
 
-const UserModel = mongoose.model<User>("User", userSchema)
+const UserModel = mongoose.model<User>("User", userSchema, 'users')
 
 export default UserModel
