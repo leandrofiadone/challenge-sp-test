@@ -15,6 +15,6 @@ const cardSchema = new mongoose.Schema<Card>({
   favorite_sport: String
 })
 
-const UserModel = mongoose.model<Card>("Card", cardSchema, 'cards')
+const CardModel = mongoose.model<Card>("Card", cardSchema, 'cards')
 
-export default UserModel
+export default CardModel
