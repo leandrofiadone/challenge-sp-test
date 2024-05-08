@@ -1,6 +1,6 @@
 import {Request, Response} from "express"
 import csvtojson from "csvtojson"
-import User from "../models/userModel"
+import User from "../models/cardModel"
 
 export const uploadFile = async (req: Request, res: Response) => {
   try {

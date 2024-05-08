@@ -1,11 +1,11 @@
 import {Request, Response} from "express"
-import User from "../models/userModel"
+import Card from "../models/cardModel"
 
-export const searchUsers = async (req: Request, res: Response) => {
+export const searchCards = async (req: Request, res: Response) => {
   const searchTerm = req.query.q?.toString().toLowerCase() || ""
 
   try {
-    const users = await User.find({
+    const cards = await Card.find({
       $or: [
         {name: {$regex: searchTerm, $options: "i"}},
         {city: {$regex: searchTerm, $options: "i"}},
@@ -14,7 +14,7 @@ export const searchUsers = async (req: Request, res: Response) => {
       ]
     })
 
-    res.status(200).json({data: users})
+    res.status(200).json({data: cards})
   } catch (err) {
     console.error(err)
     res.status(500).json({message: "Error searching users."})

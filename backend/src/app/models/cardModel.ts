@@ -1,20 +1,20 @@
 // src/app/models/userModel.ts
 import mongoose from "mongoose"
 
-interface User {
+interface Card {
   name: string
   city: string
   country: string
   favorite_sport: string
 }
 
-const userSchema = new mongoose.Schema<User>({
+const cardSchema = new mongoose.Schema<Card>({
   name: String,
   city: String,
   country: String,
   favorite_sport: String
 })
 
-const UserModel = mongoose.model<User>("User", userSchema, 'users')
+const UserModel = mongoose.model<Card>("Card", cardSchema, 'cards')
 
 export default UserModel
