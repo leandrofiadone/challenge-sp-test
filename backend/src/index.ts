@@ -4,15 +4,19 @@ import cors from 'cors'
 import UserModel from './app/models/cardModel'
 import { uploadFile } from './app/controllers/fileController'
 import { searchCards } from './app/controllers/cardController'
+import authRoutes from './app/routes/auth.routes'
 import connectDB from './app/utils/dbConnection'
 import morgan from 'morgan'
 
 import dotenv from "dotenv"
 dotenv.config()
+
+
 // Configure Express app and Multer for file upload
 const app = express()
 app.use(morgan('dev'))
 app.use(cors())
+
 const port = process.env.PORT || 3000
 const upload = multer({dest: "uploads/"})
 
@@ -21,6 +25,7 @@ connectDB()
 
 
 // Define routes
+app.use(authRoutes)
 app.post("/api/files", upload.single("file"), uploadFile)
 app.get("/api/users", searchCards)
 
