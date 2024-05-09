@@ -16,7 +16,7 @@ dotenv.config()
 const app = express()
 app.use(morgan('dev'))
 app.use(cors())
-
+app.use(express.json())
 const port = process.env.PORT || 3000
 const upload = multer({dest: "uploads/"})
 
@@ -25,7 +25,7 @@ connectDB()
 
 
 // Define routes
-app.use(authRoutes)
+app.use('/api', authRoutes)
 app.post("/api/files", upload.single("file"), uploadFile)
 app.get("/api/users", searchCards)
 
